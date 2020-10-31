@@ -22,7 +22,7 @@ class Registration(Resource):
 
     def post(self):
         args = parser.parse_args()
-        return args
+        return SignupService.add_user(args)
 
 
 api.add_resource(Registration, '/signup')

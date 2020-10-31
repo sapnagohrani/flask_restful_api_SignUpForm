@@ -1,5 +1,5 @@
 from model import Users
-
+from main import db
 
 class SignupService:
     @staticmethod
@@ -13,3 +13,13 @@ class SignupService:
             user_data['password'] = user.password
             users_list.append(user_data)
         return {"users": users_list}
+
+    @staticmethod
+    def add_user(req_data):
+        try:
+            user = Users(req_data.name, req_data.email, req_data.password)
+            db.session.add(user)
+            db.session.commit()
+            return {"message":"Data added successfully"}
+        except Exception as e:
+            print(e)
